@@ -3,7 +3,6 @@ using Application.Common.Validations;
 using Application.DTOS;
 using Application.Request;
 using AutoMapper;
-using Azure;
 using Domain.Entities;
 using FluentValidation.Results;
 using Infrastructure.Persistence;
@@ -31,7 +30,7 @@ namespace Web.Controllers
         [Authorize]
         [HttpPost]
         [Route("CreateUser")]
-        public async Task<Application.DTOS.Response<string>> AddAsync(CreatePersonRequest request)
+        public async Task<Response<string>> AddAsync(CreatePersonRequest request)
         {
             Application.DTOS.Response<string> response = new Application.DTOS.Response<string>();
             try
@@ -89,7 +88,7 @@ namespace Web.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<Application.DTOS.Response<List<PersonDTO>>> GetAllUser()
+        public async Task<Response<List<PersonDTO>>> GetAllUser()
         {
             Application.DTOS.Response<List<PersonDTO>> response = new Application.DTOS.Response<List<PersonDTO>>();
             try
@@ -122,7 +121,7 @@ namespace Web.Controllers
 
         [Authorize]
         [HttpGet("{Id}")]
-        public async Task<Application.DTOS.Response<PersonDTO>> GetById(int Id)
+        public async Task<Response<PersonDTO>> GetById(int Id)
         {
             Application.DTOS.Response<PersonDTO> response = new Application.DTOS.Response<PersonDTO>();
             try
@@ -154,7 +153,7 @@ namespace Web.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<Application.DTOS.Response<PersonDTO>> UpdatePerson(PersonDTO request)
+        public async Task<Response<PersonDTO>> UpdatePerson(PersonDTO request)
         {
             Application.DTOS.Response<PersonDTO> response = new Application.DTOS.Response<PersonDTO>();
             try
@@ -217,9 +216,9 @@ namespace Web.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<Application.DTOS.Response<string>> DeletePerson(int id)
+        public async Task<Response<string>> DeletePerson(int id)
         {
-            Application.DTOS.Response<string> response = new Application.DTOS.Response<string>();
+            Response<string> response = new Response<string>();
             try
             {
                 Expression<Func<Person, bool>> expression = t =>
