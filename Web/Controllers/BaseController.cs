@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
@@ -6,5 +7,6 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
+        
     }
 }

@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Repository
 {
-    public class DocumentTypeRepository : IDocumentTypeRepository
+    public class DocumentTypeRepository : Repository<DocumentTypes>, IDocumentTypeRepository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        public DocumentTypeRepository(ApplicationDbContext context, IMapper mapper)
+        public DocumentTypeRepository(ApplicationDbContext context, IMapper mapper) : base(context) 
         {
             _dbContext = context;
             _mapper = mapper;

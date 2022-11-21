@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
-    public interface IDocumentTypeRepository : IRepository<DocumentTypeDTO>
+    public interface IDocumentTypeRepository : IRepository<DocumentTypes>
     {
     }
 }

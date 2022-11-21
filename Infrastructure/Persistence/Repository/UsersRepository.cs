@@ -17,48 +17,18 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Repository
 {
-    public class UsersRepository : IUsersRepository
+    public class UsersRepository : Repository<Users>, IUsersRepository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ITokenServices _TokenService;
         private readonly IMapper _mapper;
 
-        public UsersRepository(ApplicationDbContext dbContext, ITokenServices tokenServices, IMapper mapper)
+        public UsersRepository(ApplicationDbContext dbContext, ITokenServices tokenServices, IMapper mapper) : base(dbContext)
         {
             _dbContext = dbContext;
             _TokenService = tokenServices;
             _mapper = mapper;
         }
-        public async Task<Response<List<UsersDTO>>> GetAll()
-        {
-            Response<List<UsersDTO>> response = new Response<List<UsersDTO>>();
-            try
-            {
-                List<Users> users = await _dbContext.Users.ToListAsync();
-
-
-                if (users.Count() > 0)
-                {
-                    response.Status = true;
-                    response.Message = $"Hay un total de: {users.Count()} usuarios";
-                    response.Result = _mapper.Map<List<UsersDTO>>(users);
-                }
-                else
-                {
-                    response.Status = true;
-                    response.Message = "No se encontraron registros.";
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
-            return response;
-        }
-
         public async Task<Response<AuthDTO>> Authenticate(AuthRequest request)
         {
             Response<AuthDTO> response = new Response<AuthDTO>();

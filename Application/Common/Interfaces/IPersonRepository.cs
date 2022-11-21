@@ -9,13 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
-    public interface IPersonRepository : IRepository<PersonDTO>
+    public interface IPersonRepository : IRepository<Person>
     {
-        Task<Response<string>> CreatePerson(CreatePersonRequest request);
-
-        Task<Response<PersonDTO>> GetById(int id);
-
-        Task<Response<PersonDTO>> UpdatePerson(PersonDTO request);
-        Task<Response<string>> DeletePerson(int id);
     }
 }

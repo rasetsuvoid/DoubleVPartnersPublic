@@ -53,19 +53,5 @@ namespace Web.Controllers
                 throw;
             }
         }
-        [Authorize]
-        [HttpGet]
-        public async Task<Application.DTOS.Response<List<UsersDTO>>> GetAllUsers()
-        {
-            try
-            {
-                return await _usersRepository.GetAll();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }
