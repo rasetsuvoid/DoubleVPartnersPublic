@@ -11,7 +11,5 @@ namespace Application.Common.Interfaces
 {
     public interface IUsersRepository : IRepository<Users>
     {
-        Task<Response<AuthDTO>> Authenticate(AuthRequest request);
-        Task<Response<string>> Register(AuthRequest request);
     }
 }
