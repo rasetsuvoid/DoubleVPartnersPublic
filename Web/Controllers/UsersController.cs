@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Application.Common.Utils;
 using Application.Common.Validations;
 using Application.DTOS;
 using Application.Request;
@@ -20,6 +21,7 @@ namespace Web.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ITokenServices _tokenServices;
+        Encrypt encrypt = new Encrypt();
 
         public UsersController(IUsersRepository usersRepository, ApplicationDbContext context, IMapper mapper, ITokenServices tokenServices)
         {
@@ -56,7 +58,7 @@ namespace Web.Controllers
                 }
 
                 Expression<Func<Users, bool>> expression = t =>
-                !(t.IsDeleted) && (t.Username == authRequest.Username) && (t.Password == authRequest.Password);
+                !(t.IsDeleted) && (t.Username == authRequest.Username) && (t.Password == encrypt.Encripta(authRequest.Password));
 
                 Users user = await _usersRepository.GetByIdAsync(expression);
 
@@ -106,7 +108,7 @@ namespace Web.Controllers
                 Users users = new Users()
                 {
                     Username = request.Username,
-                    Password = request.Password,
+                    Password = encrypt.Encripta(request.Password),
                     Active = true,
                     IsDeleted = false
                 };
